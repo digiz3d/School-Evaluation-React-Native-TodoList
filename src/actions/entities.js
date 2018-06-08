@@ -55,3 +55,11 @@ function receiveTodos(items) {
 export function refreshTodos() {
     return (dispatch) => dispatch(requestTodosAsync());
 }
+
+export default SELECT_TODO = 'SELECT_TODO';
+export function selectTodo(id) {
+    return {
+        type: SELECT_TODO,
+        id
+    };
+} 

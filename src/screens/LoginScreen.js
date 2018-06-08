@@ -22,7 +22,7 @@ class LoginScreen extends React.Component {
     }
 
     navigateToApp() {
-        return this.props.navigation.navigate('App');
+        this.props.navigation.navigate('App');
     }
 
     render() {

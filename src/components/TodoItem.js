@@ -1,24 +1,32 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import okImg from '../assets/ok.png';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { TouchableHighlight, View, Text, Image, StyleSheet } from 'react-native';
+
+import { selectTodo } from '../actions/entities';
 
 class TodoItem extends React.Component {
+    handleClick() {
+        this.props.select();
+        this.props.gotoToPageDetails();
+    }
     render() {
         if (!this.props.todo) {
             return <View><Text>Loading</Text></View>;
         }
 
         return (
-            <View style={styles.item}>
-                <View style={styles.row}>
-                    <Text style={styles.title}>{this.props.todo.text}</Text>
-                    <Text style={styles.description}>{this.props.todo.description}</Text>
+            <TouchableHighlight onPress={() => this.handleClick()} style={styles.item}>
+                <View>
+                    <View style={styles.row}>
+                        <Text style={styles.title}>{this.props.todo.text}</Text>
+                        <Text style={styles.description}>{this.props.todo.description}</Text>
+                    </View>
+                    <View style={styles.rowCentered}>
+                        {this.props.todo.isDone ? <Image style={styles.doneImage} source={okImg} /> : null}
+                    </View>
                 </View>
-                <View style={styles.rowCentered}>
-                    {this.props.todo.isDone ? <Image style={styles.doneImage} source={okImg} /> : null}
-                </View>
-            </View>
+            </TouchableHighlight>
         );
     }
 }
@@ -56,7 +64,8 @@ const mapStateToProps = (state, ownProps) => ({
     todo: state.entities.todos.items[ownProps.todoId]
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
+    select: () => dispatch(selectTodo(ownProps.todoId))
 });
 
 export default connect(

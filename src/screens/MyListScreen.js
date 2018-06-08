@@ -9,6 +9,11 @@ import TodoItem from '../components/TodoItem';
 class MyListScreen extends React.Component {
     componentDidMount() {
         this.props.fetchTodosIfNeeded();
+        this.gotoToPageDetails = this.gotoToPageDetails.bind(this);
+    }
+
+    gotoToPageDetails() {
+        this.props.navigation.navigate('PageItemDetails');
     }
 
     render() {
@@ -22,8 +27,8 @@ class MyListScreen extends React.Component {
                 <FlatList
                     data={arr}
                     renderItem={({ item }) => {
-                        return <TodoItem todoId={item.id} />
-                        }
+                        return <TodoItem todoId={item.id} gotoToPageDetails={this.gotoToPageDetails} />
+                    }
                     }
                     keyExtractor={(item, index) => index.toString()}
                     onRefresh={() => this.props.refreshTodos()}
@@ -43,7 +48,6 @@ const mapDispatchToProps = dispatch => ({
     fetchTodosIfNeeded: () => dispatch(fetchTodosIfNeeded()),
     refreshTodos: () => dispatch(refreshTodos())
 });
-
 
 export default connect(
     mapStateToProps,

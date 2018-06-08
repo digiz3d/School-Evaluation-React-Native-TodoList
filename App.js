@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 import { createSwitchNavigator, createMaterialTopTabNavigator, createStackNavigator } from 'react-navigation';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
@@ -11,7 +11,7 @@ import rootReducer from './src/reducers';
 import LoginScreen from './src/screens/LoginScreen';
 import MyListScreen from './src/screens/MyListScreen';
 import AboutScreen from './src/screens/AboutScreen';
-
+import PageItemDetails from './src/screens/PageItemDetails';
 const store = createStore(
     rootReducer,
     applyMiddleware(thunk)
@@ -29,10 +29,8 @@ const AppTabNavigator = createMaterialTopTabNavigator(
     }
 );
 const AppStackNavigator = createStackNavigator({
-    MyTab: {
-        screen: AppTabNavigator,
-        navigationOptions: { title: 'My TodoList' }
-    }
+    MyTab: { screen: AppTabNavigator, navigationOptions: { title: 'My TodoList' } },
+    PageItemDetails: { screen: PageItemDetails,navigationOptions: { title: 'Détails' }}
 },
     {
         navigationOptions: {
@@ -43,11 +41,14 @@ const AppStackNavigator = createStackNavigator({
             },
             headerTintColor: 'white',
             headerRight: (
-                <Button
-                    onPress={() => alert('This is a button!')}
-                    title="ajouter"
-                    color="#2195f2"
-                />
+                <TouchableHighlight
+                    onPress={() => alert('Bon ça ne marche pas xD')}
+                    style={{ padding: 5 }}
+                >
+                    <Text style={{ color: 'white' }}>
+                        Ajouter
+                    </Text>
+                </TouchableHighlight>
             )
         }
     });
