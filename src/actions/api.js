@@ -20,3 +20,7 @@ export function authenticate(email, password) {
         password: password
     }));
 }
+
+export function setTodoDone(todo) {
+    return api.put('api/todoItems/' + todo.id, todo);
+}

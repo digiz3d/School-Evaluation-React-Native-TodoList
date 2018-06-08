@@ -1,4 +1,4 @@
-import  { getTodos } from './api';
+import { getTodos, setTodoDone } from './api';
 
 function normalizeArrayToObject(array) {
     let normalized = {}
@@ -56,10 +56,32 @@ export function refreshTodos() {
     return (dispatch) => dispatch(requestTodosAsync());
 }
 
-export default SELECT_TODO = 'SELECT_TODO';
+export const SELECT_TODO = 'SELECT_TODO';
 export function selectTodo(id) {
     return {
         type: SELECT_TODO,
         id
     };
-} 
+}
+
+export function setTodoDoneAsync(todo) {
+    let newObj = Object.assign({}, todo);
+    newObj.isDone = true;
+    return (dispatch, getState) => {
+        setTodoDone(newObj)
+            .then(values => {
+                return dispatch(setTodoDoneSuccess(newObj));
+            })
+            .catch(err => {
+                console.warn(err);
+            });
+    }
+}
+
+export const SET_TODO_DONE = 'SET_TODO_DONE';
+function setTodoDoneSuccess(todo) {
+    return {
+        type: SET_TODO_DONE,
+        todo
+    }
+}

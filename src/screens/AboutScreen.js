@@ -16,7 +16,7 @@ class AboutScreen extends React.Component {
                 <Text>TodoList</Text>
                 <Text>version 1.0</Text>
                 <Text>Léandre DAUMONT</Text>
-                <Button onPress={() => this.debug()} title="DEBUG"/>
+                
             </View>
         );
     }
