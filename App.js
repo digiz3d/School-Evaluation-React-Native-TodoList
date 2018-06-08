@@ -19,8 +19,9 @@ const store = createStore(
 
 const AuthScreen = createStackNavigator(
     {
-        Login: { screen: LoginScreen, navigationOptions: { title: 'LOOOGIN' } }
-    }
+        Login: { screen: LoginScreen, navigationOptions: { title: 'Login' } }
+    },
+    { navigationOptions: { headerStyle: { backgroundColor: '#2195f2' }, headerTintColor: 'white', } }
 );
 const AppTabNavigator = createMaterialTopTabNavigator(
     {
@@ -30,7 +31,7 @@ const AppTabNavigator = createMaterialTopTabNavigator(
 );
 const AppStackNavigator = createStackNavigator({
     MyTab: { screen: AppTabNavigator, navigationOptions: { title: 'My TodoList' } },
-    PageItemDetails: { screen: PageItemDetails,navigationOptions: { title: 'Détails' }}
+    PageItemDetails: { screen: PageItemDetails, navigationOptions: { title: 'Détails' } }
 },
     {
         navigationOptions: {
